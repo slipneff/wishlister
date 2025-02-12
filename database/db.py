@@ -1,9 +1,12 @@
 import sqlite3
+import os
 from typing import Optional, List, Tuple, Any
 
 class Database:
-    def __init__(self, db_name: str = 'wishlist.db'):
-        self.db_name = db_name
+    def __init__(self, db_name: str = None):
+        self.db_name = db_name or os.getenv('DATABASE_PATH', 'data/wishlist.db')
+        # Создаем директорию для базы данных, если её нет
+        os.makedirs(os.path.dirname(self.db_name), exist_ok=True)
 
     def __enter__(self):
         self.conn = sqlite3.connect(self.db_name)

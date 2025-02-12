@@ -5,5 +5,7 @@ services:
     build: .
     restart: always
     volumes:
-      - ./wishlist.db:/app/wishlist.db
-      - ./.env:/app/.env 
+      - ./data:/app/data
+      - ./.env:/app/.env
+    environment:
+      - DATABASE_PATH=/app/data/wishlist.db
